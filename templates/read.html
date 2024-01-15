@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Zoo Read</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/add">Add Animal</a></li>
+            <li><a href="/read">Read Animals</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
+    </nav>
+    <h1>Welcome to the Zoo!</h1>
+    <!-- Similar structure as home.html -->
+    <h2>Animal List</h2>
+    <ul>
+        {% for animal in animals %}
+        <li>
+            {{ animal.name }} - {{ animal.type }} - {{ animal.age }} years old - {{ animal.species }}
+            <img src="{{ animal.image_url }}" alt="{{ animal.name }}">
+
+            <!-- Add a "delete" button for each animal -->
+            <form method="POST" action="{{ url_for('delete', animal_id=animal.id) }}">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
